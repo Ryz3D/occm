@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, BrowserRouter, Route } from 'react-router-dom';
 
 import HomePage from './pages/home';
 import NotFoundPage from './pages/notFound';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes>
-      <Route path='/' element={<HomePage />} />
-      <Route element={<NotFoundPage />} />
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
