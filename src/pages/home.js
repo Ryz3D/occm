@@ -10,7 +10,7 @@ class HomePage extends React.Component {
           HALLO ICH BIN MIRCO
         </mui.Typography>
         <Link to="/b">
-          Fick mich
+          Klick mich
         </Link>
       </div>
     );
