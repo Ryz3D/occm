@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Routes, Route } from 'react-router-dom';
+
+import HomePage from './pages/home';
+import NotFoundPage from './pages/notFound';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route element={<NotFoundPage />} />
+    </Routes>
   </React.StrictMode>,
   document.getElementById('root')
 );
