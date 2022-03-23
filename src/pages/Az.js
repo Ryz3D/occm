@@ -1,7 +1,7 @@
 import * as mui from '@mui/material';
 import React from 'react';
 
-class AzBT extends React.Component {
+class AzBt extends React.Component {
     render() {
         return(
             <mui.Typography>
@@ -11,4 +11,4 @@ class AzBT extends React.Component {
     }
 }
 
-export default AzBT;
+export default AzBt;

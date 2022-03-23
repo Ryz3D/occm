@@ -7,7 +7,7 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 
 import HomePage from './pages/home';
 import NotFoundPage from './pages/notFound';
-import AzBT from './pages/Az';
+import AzBt from './pages/Az';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +15,7 @@ ReactDOM.render(
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='*' element={<NotFoundPage />} />
-        <Route path='az' element={<AzBT />} />
+        <Route path='az' element={<AzBt />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
