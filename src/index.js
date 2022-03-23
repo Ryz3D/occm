@@ -7,6 +7,7 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 
 import HomePage from './pages/home';
 import NotFoundPage from './pages/notFound';
+import Az from '.pages/Az';
 
 ReactDOM.render(
   <React.StrictMode>

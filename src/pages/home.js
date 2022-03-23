@@ -10,9 +10,19 @@ class HomePage extends React.Component {
         <mui.Typography variant='h1'>
           OCCM
         </mui.Typography>
+        <br />
         <Link to="/b">
           Testlink
         </Link>
+        <br />
+        <br />
+        <mui.Typography variant='h5'>
+          Bauteile
+        </mui.Typography>
+        <Link to="/az">
+          Az
+        </Link>
+        <br />
         <br />
         <br />
 
