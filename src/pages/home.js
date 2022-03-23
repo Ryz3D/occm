@@ -19,7 +19,7 @@ class HomePage extends React.Component {
         <mui.Typography variant='h5'>
           Bauteile
         </mui.Typography>
-        <Link to="/az_bauteil">
+        <Link to="/az">
           Az
         </Link>
         <br />
