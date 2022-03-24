@@ -4,9 +4,11 @@ import React from 'react';
 class AzBt extends React.Component {
     render() {
         return(
+            <>
             <mui.Typography>
                 Az
             </mui.Typography>
+            </>
         );
     }
 }
