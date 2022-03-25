@@ -2,6 +2,8 @@ import * as mui from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BtAz from '../components/Bt/Az';
+import BtBalisen from '../components/Bt/Balisen';
+import BtIndusi from '../components/Bt/Indusi';
 import TextInputComponent from '../components/textInput';
 
 class HomePage extends React.Component {
@@ -36,7 +38,7 @@ class HomePage extends React.Component {
           anchorOrigin={{ horizontal: "center", vertical: "top" }}
           transformOrigin={{ horizontal: "center", vertical: "top" }}>
           <mui.Box padding="30px">
-            <BtAz />
+            <BtBalisen />
             <br />
             <br />
             <mui.ButtonGroup fullWidth>
