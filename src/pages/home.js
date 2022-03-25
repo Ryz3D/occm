@@ -1,6 +1,7 @@
 import * as mui from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BtAz from '../components/Bt/Az';
 import TextInputComponent from '../components/textInput';
 
 class HomePage extends React.Component {
@@ -11,22 +12,43 @@ class HomePage extends React.Component {
           OCCM
         </mui.Typography>
         <br />
-        <Link to="/b">
-          Testlink
-        </Link>
-        <br />
         <br />
         <mui.Typography variant='h5'>
           Bauteile
         </mui.Typography>
-        <Link to="/az">
-          Az
-        </Link>
+        <br />
+        <mui.Select>
+          {["Az", "Balisen", "LZB Schrank", "Indusi", "Bemerkung"].map(s =>
+            <mui.MenuItem>
+              {s}
+            </mui.MenuItem>
+          )}
+        </mui.Select>
+        <mui.Button variant='contained'>
+          Hinzufügen
+        </mui.Button>
         <br />
         <br />
         <br />
 
         <TextInputComponent />
+        <mui.Popover open BackdropProps
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
+          transformOrigin={{ horizontal: "center", vertical: "top" }}>
+          <mui.Box padding="30px">
+            <BtAz />
+            <br />
+            <br />
+            <mui.ButtonGroup fullWidth>
+              <mui.Button color='inherit'>
+                Abbrechen
+              </mui.Button>
+              <mui.Button variant='contained' color='success'>
+                Speichern
+              </mui.Button>
+            </mui.ButtonGroup>
+          </mui.Box>
+        </mui.Popover>
       </div>
     );
   }

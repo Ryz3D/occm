@@ -4,20 +4,38 @@ import './index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { Routes, BrowserRouter, Route } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import HomePage from './pages/home';
 import NotFoundPage from './pages/notFound';
-import AzBt from './pages/Az';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#fb0010',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#000000',
+      dark: '#ba000d',
+      contrastText: '#fff',
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='*' element={<NotFoundPage />} />
-        <Route path='az' element={<AzBt />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
