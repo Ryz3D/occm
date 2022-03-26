@@ -1,10 +1,13 @@
 import * as mui from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+
+import TextInputComponent from '../components/textInput';
 import BtAz from '../components/Bt/Az';
 import BtBalisen from '../components/Bt/Balisen';
+import BtBemerkung from '../components/Bt/Bemerkungen'
 import BtIndusi from '../components/Bt/Indusi';
-import TextInputComponent from '../components/textInput';
+import BtLZB from '../components/Bt/LZB';
 
 class HomePage extends React.Component {
   render() {
@@ -20,7 +23,7 @@ class HomePage extends React.Component {
         </mui.Typography>
         <br />
         <mui.Select>
-          {["Az", "Balisen", "LZB Schrank", "Indusi", "Bemerkung"].map(s =>
+          {['Az', 'Balisen', 'LZB Schrank', 'Indusi', 'Bemerkung'].map(s =>
             <mui.MenuItem>
               {s}
             </mui.MenuItem>
@@ -35,9 +38,9 @@ class HomePage extends React.Component {
 
         <TextInputComponent />
         <mui.Popover open BackdropProps
-          anchorOrigin={{ horizontal: "center", vertical: "top" }}
-          transformOrigin={{ horizontal: "center", vertical: "top" }}>
-          <mui.Box padding="30px">
+          anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+          transformOrigin={{ horizontal: 'center', vertical: 'top' }}>
+          <mui.Box padding='30px'>
             <BtBalisen />
             <br />
             <br />

@@ -10,7 +10,7 @@ class BtLZB extends React.Component {
                 </mui.Typography>
                 <br />
                 <mui.TextField fullWidth label='Bezeichnung' />
-                <mui.FormControlLabel control={<mui.Checkbox/>} label='Nachbargleis mit Außerbetrieb'/>
+                <mui.FormControlLabel control={<mui.Checkbox />} label='Nachbargleis mit Außerbetrieb' />
             </>
         );
     }

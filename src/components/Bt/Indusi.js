@@ -10,7 +10,7 @@ class BtIndusi extends React.Component {
                 </mui.Typography>
                 <br />
                 <mui.TextField fullWidth label='Bezeichnung' />
-                <mui.FormControlLabel control={<mui.Checkbox/>} label='mit Kabel'/>
+                <mui.FormControlLabel control={<mui.Checkbox />} label='mit Kabel' />
             </>
         );
     }
