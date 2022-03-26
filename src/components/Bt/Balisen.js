@@ -1,6 +1,7 @@
 import * as mui from '@mui/material';
 import React from 'react';
 
+
 class BtBalisen extends React.Component {
     constructor(props) {
         super(props);
@@ -28,10 +29,10 @@ class BtBalisen extends React.Component {
         }, () => this.dataChange());
     }
 
-    handleNGmABChange(event) {
+    handleCheckboxChange(event) {
         this.setState({
-            NGmAB: event.target.checked,
-        }, () => this.dataChange());
+            NGmAB: true,
+        });
     }
 
     render() {
@@ -43,8 +44,9 @@ class BtBalisen extends React.Component {
                 <br />
                 <mui.TextField fullWidth label='Bezeichnung'
                     value={this.state.text} onChange={(e) => this.handleTextChange(e)} />
+
                 <mui.FormControlLabel control={<mui.Checkbox checked={this.state.NGmAB}
-                    onChange={(e) => this.handleNGmABChange(e)} />}
+                    onChange={(e) => this.handleCheckboxChange(e)} />}
                     label='Nachbargleis mit Außerbetrieb' />
             </>
         );

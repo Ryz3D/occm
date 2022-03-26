@@ -57,8 +57,10 @@ class HomePage extends React.Component {
         <mui.Typography variant='h3'>
           OCCM
         </mui.Typography>
+        
         <br />
         <br />
+        
         <mui.Typography variant='h5'>
           Bauteile
         </mui.Typography>

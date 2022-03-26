@@ -24,11 +24,8 @@ class TextInputComponent extends React.Component {
   render() {
     return (
       <>
-        <mui.TextField fullWidth label='Hier kommt was rein' variant='filled' />
+        <mui.TextField fullWidth label='Bezeichnung' />
         <br />
-        <mui.Button fullWidth variant='contained'>
-          OK
-        </mui.Button>
       </>
     );
   }
