@@ -37,7 +37,7 @@ class HomePage extends React.Component {
         <br />
 
         <TextInputComponent />
-        <mui.Popover open BackdropProps
+        <mui.Popover /*open*/ BackdropProps
           anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
           transformOrigin={{ horizontal: 'center', vertical: 'top' }}>
           <mui.Box padding='30px'>
