@@ -2,7 +2,7 @@ import * as mui from '@mui/material';
 import React from 'react';
 //import { Link } from 'react-router-dom';
 
-import TextInputComponent from '../components/textInput';
+//import TextInputComponent from '../components/textInput';
 import BtAz from '../components/Bt/Az';
 import BtBalisen from '../components/Bt/Balisen';
 import BtBemerkung from '../components/Bt/Bemerkungen'
@@ -60,11 +60,18 @@ class HomePage extends React.Component {
 
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-        <mui.Typography variant='h5'>
+        <mui.Typography variant='h4'>
           Bauteile
         </mui.Typography>
 
+        <br />
         <br />
 
         <mui.Grid container>
@@ -108,6 +115,8 @@ class HomePage extends React.Component {
           </mui.Box>
         </mui.Popover>
 
+        <br />
+        <br />
         <br />
         <br />
 
