@@ -57,10 +57,10 @@ class HomePage extends React.Component {
         <mui.Typography variant='h3'>
           OCCM
         </mui.Typography>
-        
+
         <br />
         <br />
-        
+
         <mui.Typography variant='h5'>
           Bauteile
         </mui.Typography>
@@ -85,11 +85,6 @@ class HomePage extends React.Component {
           </mui.Grid>
         </mui.Grid>
 
-        <br />
-        <br />
-        <br />
-
-        <TextInputComponent />
         <mui.Popover open={this.state.BtPOopen} BackdropProps
           anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
           transformOrigin={{ horizontal: 'center', vertical: 'top' }}>
@@ -112,6 +107,13 @@ class HomePage extends React.Component {
             </mui.ButtonGroup>
           </mui.Box>
         </mui.Popover>
+
+        <br />
+        <br />
+
+        <mui.Button fullWidth variant='contained'>
+          PDF erstellen
+        </mui.Button>
       </div>
     );
   }
