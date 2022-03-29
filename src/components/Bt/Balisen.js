@@ -1,5 +1,6 @@
 import * as mui from '@mui/material';
 import React from 'react';
+import CheckBoxComponent from '../checkBox';
 
 
 class BtBalisen extends React.Component {
@@ -45,9 +46,8 @@ class BtBalisen extends React.Component {
                 <mui.TextField fullWidth label='Bezeichnung'
                     value={this.state.text} onChange={(e) => this.handleTextChange(e)} />
 
-                <mui.FormControlLabel control={<mui.Checkbox checked={this.state.NGmAB}
-                    onChange={(e) => this.handleCheckboxChange(e)} />}
-                    label='Nachbargleis mit Außerbetrieb' />
+                
+                <CheckBoxComponent CB={this.state.NGmAB} labelCB='Test' />
             </>
         );
     }

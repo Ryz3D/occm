@@ -1,14 +1,14 @@
 import * as mui from '@mui/material';
 import React from 'react';
 
-/*
+
 class CheckBoxComponent extends React.Component {
     render() {
         return (
             <>
-                <mui.FormControlLabel control={<mui.Checkbox checked={this.state.NGmAB}
+                <mui.FormControlLabel control={<mui.Checkbox checked={this.props.CB}
                     onChange={(e) => this.handleCheckboxChange(e)} />}
-                    {{this.props.labelCB}} />
+                    label={this.props.labelCB} />
                 <br />
             </>
         );
@@ -16,4 +16,3 @@ class CheckBoxComponent extends React.Component {
 }
 
 export default CheckBoxComponent;
-*/
