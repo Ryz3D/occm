@@ -38,7 +38,7 @@ class HomePage extends React.Component {
   handleBTPOClose() {
     this.setState({
       BtPOopen: false,
-      canSave: false,
+      canSaveBT: false,
     });
   }
 
@@ -52,7 +52,7 @@ class HomePage extends React.Component {
   handleBTPOSave() {
     this.setState({
       BtPOopen: false,
-      canSave: false,
+      canSaveBT: false,
     });
     console.log(this.state.currentBTdata); //TO DO: Daten in Liste speichern
   }

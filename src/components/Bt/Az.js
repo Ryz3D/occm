@@ -16,7 +16,7 @@ class BtAz extends React.Component {
     dataChange(id, value) {
         this.data[id] = value;
         if (this.props.onChange) {
-            this.props.onChange(this.data);
+            this.props.onChange(this.data, this.data.bezeichnung !== '');
         } else {
             console.warn('BtAz: onChange missing');
         }
