@@ -9,6 +9,7 @@ import BtBemerkung from '../components/Bt/Bemerkungen'
 import BtIndusi from '../components/Bt/Indusi';
 import BtLZB from '../components/Bt/LZB';
 
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
