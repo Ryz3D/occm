@@ -54,7 +54,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <mui.Typography variant='h3'>
+        <mui.Typography variant='h3' align='center'>
           OCCM
         </mui.Typography>
 
