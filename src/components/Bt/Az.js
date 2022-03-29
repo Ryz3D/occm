@@ -3,32 +3,25 @@ import React from 'react';
 
 import TextInputComponent from '../textInput';
 
-
 class BtAz extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {
-            text: '',
+        this.data = {
+            BTtype: 'Achszähler',
+            bezeichnung: '',
         };
     }
 
-    dataChange() {
+    dataChange(id, value) {
+        this.data[id] = value;
         if (this.props.onChange) {
-            this.props.onChange({
-                type: 'Achszähler',
-                bezeichnung: this.state.text,
-            });
+            this.props.onChange(this.data);
         } else {
             console.warn('BtAz: onChange missing');
         }
     }
 
-    handleTextChange(event) {
-        this.setState({
-            text: event.target.value,
-        }, () => this.dataChange());
-    }
-    
     render() {
         return (
             <>
@@ -36,8 +29,7 @@ class BtAz extends React.Component {
                     Achszähler
                 </mui.Typography>
                 <br />
-                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
-                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
+                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
             </>
         );
     }

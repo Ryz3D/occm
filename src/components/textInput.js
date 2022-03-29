@@ -21,11 +21,25 @@ beispiel profilseite
 */
 
 class TextInputComponent extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
+  }
+
+  handleValueChange(event) {
+    this.setState({
+      value: event.target.value,
+    }, () => this.props.onChange(this.state.value));
+  }
+
   render() {
     return (
       <>
-        <mui.TextField fullWidth label={this.props.labelTextInput} 
-        value={this.props.valueTextInput} onChange={this.props.onChangeTextInput} />
+        <mui.TextField fullWidth label={this.props.label || 'Bezeichnung'}
+          value={this.state.value} onChange={(e) => this.handleValueChange(e)} />
         <br />
       </>
     );

@@ -8,34 +8,20 @@ import TextInputComponent from '../textInput';
 class BtBalisen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            text: '',
-            NGmAB: false,  //Nachbargleis mit Außerbetrieb
+        this.data = {
+            BTtype: 'Balisen',
+            bezeichnung: '',
+            NGmAB: false,
         };
     }
 
-    dataChange() {
+    dataChange(id, value) {
+        this.data[id] = value;
         if (this.props.onChange) {
-            this.props.onChange({
-                type: 'Balisen',
-                bezeichnung: this.state.text,
-                NGmAB: this.state.NGmAB,
-            });
+            this.props.onChange(this.data, this.data.bezeichnung !== '');
         } else {
             console.warn('BtBalisen: onChange missing');
         }
-    }
-
-    handleTextChange(event) {
-        this.setState({
-            text: event.target.value,
-        }, () => this.dataChange());
-    }
-
-    handleCheckboxChange(event) {
-        this.setState({
-            NGmAB: true,
-        });
     }
 
     render() {
@@ -45,12 +31,10 @@ class BtBalisen extends React.Component {
                     Balisen
                 </mui.Typography>
                 <br />
-                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
-                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
+                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
 
-                <CheckBoxComponent CheckBox={this.state.NGmAB}
-                    onChangeCheckBox={(e) => this.handleCheckboxChange(e)}
-                    labelCheckBox='Nachbargleis mit Außerbetrieb' />
+                <CheckBoxComponent onChange={(check) => this.dataChange('NGmAB', check)}
+                    label='Nachbargleis mit Außerbetrieb' />
             </>
         );
     }

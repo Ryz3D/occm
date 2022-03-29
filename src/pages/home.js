@@ -1,5 +1,6 @@
 import * as mui from '@mui/material';
 import React from 'react';
+import BasicUIComponent from '../components/basicUI';
 //import { Link } from 'react-router-dom';
 
 //import TextInputComponent from '../components/textInput';
@@ -17,6 +18,7 @@ class HomePage extends React.Component {
       selectedBT: 0,
       BtPOopen: false,
       currentBTdata: null,
+      canSaveBT: false,
     };
   }
 
@@ -39,9 +41,10 @@ class HomePage extends React.Component {
     });
   }
 
-  handleBTData(data) {
+  handleBTData(data, canSave) {
     this.setState({
       currentBTdata: data,
+      canSaveBT: canSave,
     });
   }
 
@@ -54,20 +57,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div>
-        <mui.Typography variant='h3' align='center'>
-          OCCM
-        </mui.Typography>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
+      <BasicUIComponent>
         <mui.Typography variant='h4'>
           Bauteile
         </mui.Typography>
@@ -97,11 +87,11 @@ class HomePage extends React.Component {
           anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
           transformOrigin={{ horizontal: 'center', vertical: 'top' }}>
           <mui.Box padding='30px' width='80vw'>
-            {this.state.selectedBT === 0 && <BtAz onChange={(d) => this.handleBTData(d)} />}
-            {this.state.selectedBT === 1 && <BtBalisen onChange={(d) => this.handleBTData(d)} />}
-            {this.state.selectedBT === 2 && <BtLZB onChange={(d) => this.handleBTData(d)} />}
-            {this.state.selectedBT === 3 && <BtIndusi onChange={(d) => this.handleBTData(d)} />}
-            {this.state.selectedBT === 4 && <BtBemerkung onChange={(d) => this.handleBTData(d)} />}
+            {this.state.selectedBT === 0 && <BtAz onChange={(d, c) => this.handleBTData(d, c)} />}
+            {this.state.selectedBT === 1 && <BtBalisen onChange={(d, c) => this.handleBTData(d, c)} />}
+            {this.state.selectedBT === 2 && <BtLZB onChange={(d, c) => this.handleBTData(d, c)} />}
+            {this.state.selectedBT === 3 && <BtIndusi onChange={(d, c) => this.handleBTData(d, c)} />}
+            {this.state.selectedBT === 4 && <BtBemerkung onChange={(d, c) => this.handleBTData(d, c)} />}
             <br />
             <br />
             <mui.ButtonGroup fullWidth>
@@ -109,7 +99,7 @@ class HomePage extends React.Component {
                 Abbrechen
               </mui.Button>
               <mui.Button variant='contained' color='success' onClick={() => this.handleBTPOSave()}
-                disabled={this.state.currentBTdata === null}>
+                disabled={!this.state.canSaveBT}>
                 Speichern
               </mui.Button>
             </mui.ButtonGroup>
@@ -124,7 +114,7 @@ class HomePage extends React.Component {
         <mui.Button fullWidth variant='contained'>
           PDF erstellen
         </mui.Button>
-      </div>
+      </BasicUIComponent>
     );
   }
 }

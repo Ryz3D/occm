@@ -8,27 +8,30 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import HomePage from './pages/home';
 import NotFoundPage from './pages/notFound';
+import { CssBaseline } from '@mui/material';
 
 const theme = createTheme({
   palette: {
     primary: {
       light: '#757ce8',
       main: '#fb0010',
-      dark: '#002884',
+      dark: '#991111',
       contrastText: '#fff',
     },
     secondary: {
       light: '#ff7961',
-      main: '#000000',
-      dark: '#ba000d',
+      main: '#0f0',
+      dark: '#0f0',
       contrastText: '#fff',
     },
+    mode: 'dark',
   },
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage />} />
