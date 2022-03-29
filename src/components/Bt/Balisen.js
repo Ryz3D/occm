@@ -1,6 +1,8 @@
 import * as mui from '@mui/material';
 import React from 'react';
+
 import CheckBoxComponent from '../checkBox';
+import TextInputComponent from '../textInput';
 
 
 class BtBalisen extends React.Component {
@@ -43,11 +45,12 @@ class BtBalisen extends React.Component {
                     Balisen
                 </mui.Typography>
                 <br />
-                <mui.TextField fullWidth label='Bezeichnung'
-                    value={this.state.text} onChange={(e) => this.handleTextChange(e)} />
+                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
+                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
 
-                
-                <CheckBoxComponent CB={this.state.NGmAB} labelCB='Test' />
+                <CheckBoxComponent CheckBox={this.state.NGmAB}
+                    onChangeCheckBox={(e) => this.handleCheckboxChange(e)}
+                    labelCheckBox='Nachbargleis mit Außerbetrieb' />
             </>
         );
     }

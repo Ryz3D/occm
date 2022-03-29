@@ -24,7 +24,8 @@ class TextInputComponent extends React.Component {
   render() {
     return (
       <>
-        <mui.TextField fullWidth label='Bezeichnung' />
+        <mui.TextField fullWidth label={this.props.labelTextInput} 
+        value={this.props.valueTextInput} onChange={this.props.onChangeTextInput} />
         <br />
       </>
     );

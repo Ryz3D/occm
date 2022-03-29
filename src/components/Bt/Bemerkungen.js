@@ -1,6 +1,9 @@
 import * as mui from '@mui/material';
 import React from 'react';
 
+import TextInputComponent from '../textInput';
+
+
 class BtBemerkung extends React.Component {
     constructor(props) {
         super(props);
@@ -33,8 +36,8 @@ class BtBemerkung extends React.Component {
                     Bemerkung
                 </mui.Typography>
                 <br />
-                <mui.TextField fullWidth label='Bezeichnung'
-                    value={this.state.text} onChange={(e) => this.handleTextChange(e)} />
+                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
+                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
             </>
         );
     }
