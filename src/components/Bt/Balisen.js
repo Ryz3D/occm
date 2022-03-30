@@ -4,14 +4,13 @@ import React from 'react';
 import CheckBoxComponent from '../checkBox';
 import TextInputComponent from '../textInput';
 
-
 class BtBalisen extends React.Component {
     constructor(props) {
         super(props);
         this.data = {
-            BTtype: 'Balisen',
+            btType: 'balisen',
             bezeichnung: '',
-            NGmAB: false,
+            gruppe: false,
         };
     }
 
@@ -33,8 +32,8 @@ class BtBalisen extends React.Component {
                 <br />
                 <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
 
-                <CheckBoxComponent onChange={(check) => this.dataChange('NGmAB', check)}
-                    label='Nachbargleis mit Außerbetrieb' />
+                <CheckBoxComponent onChange={(check) => this.dataChange('gruppe', check)}
+                    label='Balisengruppe' />
             </>
         );
     }

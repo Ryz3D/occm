@@ -4,38 +4,23 @@ import React from 'react';
 import TextInputComponent from '../textInput';
 import CheckBoxComponent from '../checkBox';
 
-
 class BtIndusi extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            text: '',
+        this.data = {
+            btType: 'indusi',
+            bezeichnung: '',
             mitKabel: false,
         };
     }
 
-    dataChange() {
+    dataChange(id, value) {
+        this.data[id] = value;
         if (this.props.onChange) {
-            this.props.onChange({
-                type: 'Indusi',
-                bezeichnung: this.state.text,
-                mitKabel: this.state.mitKabel,
-            });
+            this.props.onChange(this.data, this.data.bezeichnung !== '');
         } else {
             console.warn('BtIndusi: onChange missing');
         }
-    }
-
-    handleTextChange(event) {
-        this.setState({
-            text: event.target.value,
-        }, () => this.dataChange());
-    }
-
-    handleCheckboxChange(event) {
-        this.setState({
-            mitKabel: true,
-        });
     }
 
     render() {
@@ -45,12 +30,10 @@ class BtIndusi extends React.Component {
                     Indusi
                 </mui.Typography>
                 <br />
-                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
-                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
+                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
 
-                <CheckBoxComponent CheckBox={this.state.mitKabel}
-                    onChangeCheckBox={(e) => this.handleCheckboxChange(e)}
-                    labelCheckBox='mit Kabel' />
+                <CheckBoxComponent onChange={(check) => this.dataChange('mitKabel', check)}
+                    label='mit Kabel' />
             </>
         );
     }

@@ -3,32 +3,23 @@ import React from 'react';
 
 import TextInputComponent from '../textInput';
 
-
 class BtBemerkung extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            text: '',
+        this.data = {
+            btType: 'bemerkung',
+            bezeichnung: '',
         };
     }
 
-    dataChange() {
+    dataChange(id, value) {
+        this.data[id] = value;
         if (this.props.onChange) {
-            this.props.onChange({
-                type: 'Bemerkung',
-                text: this.state.text,
-            });
+            this.props.onChange(this.data, this.data.bezeichnung !== '');
         } else {
             console.warn('BtBemerkung: onChange missing');
         }
     }
-
-    handleTextChange(event) {
-        this.setState({
-            text: event.target.value,
-        }, () => this.dataChange());
-    }
-
     render() {
         return (
             <>
@@ -36,8 +27,7 @@ class BtBemerkung extends React.Component {
                     Bemerkung
                 </mui.Typography>
                 <br />
-                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
-                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
+                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
             </>
         );
     }

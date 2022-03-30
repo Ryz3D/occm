@@ -4,38 +4,23 @@ import React from 'react';
 import TextInputComponent from '../textInput';
 import CheckBoxComponent from '../checkBox';
 
-
 class BtLZB extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            text: '',
-            NGmAB: false,  //Nachbargleis mit Außerbetrieb
+        this.data = {
+            btType: 'lzb',
+            bezeichnung: '',
+            mitKabel: false,
         };
     }
 
-    dataChange() {
+    dataChange(id, value) {
+        this.data[id] = value;
         if (this.props.onChange) {
-            this.props.onChange({
-                type: 'LZB',
-                bezeichnung: this.state.text,
-                NGmAB: this.state.NGmAB,
-            });
+            this.props.onChange(this.data, this.data.bezeichnung !== '');
         } else {
             console.warn('BtLZB: onChange missing');
         }
-    }
-
-    handleTextChange(event) {
-        this.setState({
-            text: event.target.value,
-        }, () => this.dataChange());
-    }
-
-    handleCheckboxChange(event) {
-        this.setState({
-            NGmAB: true,
-        });
     }
 
     render() {
@@ -45,12 +30,10 @@ class BtLZB extends React.Component {
                     LZB Schrank
                 </mui.Typography>
                 <br />
-                <TextInputComponent fullWidth labelTextInput='Bezeichnung'
-                    valueTextInput={this.state.text} onChangeTextInput={(e) => this.handleTextChange(e)} />
+                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
 
-                <CheckBoxComponent CheckBox={this.state.NGmAB}
-                    onChangeCheckBox={(e) => this.handleCheckboxChange(e)}
-                    labelCheckBox='Nachbargleis mit Außerbetrieb' />
+                <CheckBoxComponent onChange={(check) => this.dataChange('mitKabel', check)}
+                    label='mit Kabel' />
             </>
         );
     }

@@ -8,7 +8,7 @@ class BtAz extends React.Component {
     constructor(props) {
         super(props);
         this.data = {
-            BTtype: 'Achszähler',
+            btType: 'az',
             bezeichnung: '',
         };
     }
