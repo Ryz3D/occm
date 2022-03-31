@@ -229,7 +229,7 @@ class HomePage extends React.Component {
                 Bemerkungen
               </mui.TableCell>
               <mui.TableCell>
-                {this.state.docData.bt.filter((bt) => bt.btType !== 'bemerkung').length}
+                {this.state.docData.bt.filter((bt) => bt.btType === 'bemerkung').length}
               </mui.TableCell>
             </mui.TableRow>
             <mui.TableRow hover>
@@ -243,7 +243,7 @@ class HomePage extends React.Component {
                 </div>
               </mui.TableCell>
               <mui.TableCell>
-                {this.state.docData.bt.length}
+                {this.state.docData.bt.filter((bt) => bt.btType !== 'bemerkung').length}
               </mui.TableCell>
             </mui.TableRow>
           </mui.Table>

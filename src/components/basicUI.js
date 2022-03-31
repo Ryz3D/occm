@@ -2,6 +2,8 @@ import * as mui from '@mui/material';
 import React from 'react';
 import { Menu as MenuIcon, Assignment as AssignmentIcon, AddBox as AddBoxIcon } from '@mui/icons-material';
 
+import image from './Hintergrundbild2.jpg';
+
 class BasicUIComponent extends React.Component {
 
     constructor(props) {
@@ -32,6 +34,7 @@ class BasicUIComponent extends React.Component {
             width: '100%',
             height: '100%',
             overflowY: 'scroll',
+            backgroundImage: image,
         };
         return (
             <div style={basicStyle}>
