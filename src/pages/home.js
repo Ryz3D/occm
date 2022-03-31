@@ -2,6 +2,8 @@ import { Functions as FunctionsIcon } from '@mui/icons-material';
 import * as mui from '@mui/material';
 import React from 'react';
 import BasicUIComponent from '../components/basicUI';
+import DatePicker from "react-datepicker";
+import "./react-datepicker.css";
 
 import BtAz from '../components/Bt/Az';
 import BtBalisen from '../components/Bt/Balisen';
@@ -127,7 +129,7 @@ class HomePage extends React.Component {
 
         <br />
         <br />
-
+        <DatePicker  />
         <br />
         <br />
 
