@@ -2,7 +2,7 @@ import * as mui from '@mui/material';
 import React from 'react';
 import { Menu as MenuIcon, Assignment as AssignmentIcon, AddBox as AddBoxIcon, ArrowBackIosNew as ArrowBackIosNewIcon } from '@mui/icons-material';
 
-import image from './bg1.png';
+import image from '../img/bg1.png';
 
 class BasicUIComponent extends React.Component {
 
