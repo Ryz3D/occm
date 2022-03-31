@@ -114,19 +114,21 @@ class HomePage extends React.Component {
       tablePOopen: false,
     });
   }
-
   render() {
     return (
       <BasicUIComponent>
-        <mui.Typography variant='h4'>
-          Bauteile
-        </mui.Typography>
 
+        <br />
+        <br />
         <br />
         <br />
 
         <mui.TextField fullWidth label='Baustellenname' onChange={(e) => this.handleTitleChange(e)}
           value={this.state.docData.title} />
+
+        <br />
+        <br />
+
         <br />
         <br />
 
@@ -181,7 +183,6 @@ class HomePage extends React.Component {
           </mui.Popover>
         </mui.ThemeProvider>
 
-        <br />
         <br />
 
         <mui.Typography>
@@ -249,7 +250,6 @@ class HomePage extends React.Component {
           </mui.Table>
         </mui.Typography>
 
-        <br />
         <br />
 
         <mui.Button fullWidth variant='outlined' onClick={() => this.handleTablePOopen()}>

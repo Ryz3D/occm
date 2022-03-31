@@ -10,7 +10,7 @@ class BtLZB extends React.Component {
         this.data = {
             btType: 'lzb',
             bezeichnung: '',
-            mitKabel: false,
+            NGmAB: false,
         };
     }
 
@@ -32,8 +32,8 @@ class BtLZB extends React.Component {
                 <br />
                 <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
 
-                <CheckBoxComponent onChange={(check) => this.dataChange('mitKabel', check)}
-                    label='mit Kabel' />
+                <CheckBoxComponent onChange={(check) => this.dataChange('NGmAB', check)}
+                    label='Nachbargleis mit Außerbetrieb' />
             </>
         );
     }

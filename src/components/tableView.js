@@ -17,6 +17,14 @@ class TableViewComponent extends React.Component {
                 field: 'gruppe',
                 headerName: 'Balisengruppe',
             },
+            {
+                field: 'mitKabel',
+                headerName: 'Mit Kabel',
+            },
+            {
+                field: 'NGmAB',
+                headerName: 'NG mit AB',
+            },
         ];
 
         const basicStyle = {
