@@ -56,7 +56,7 @@ class TableViewComponent extends React.Component {
                     <mui.Grid item style={boxItemStyle}>
                         <b>Tag:</b>
                         <div style={boxStyle}>
-                            {this.props.docData.date}
+                            {this.props.docData.date.toLocaleDateString()}
                         </div>
                     </mui.Grid>
                     <div style={{width: '31px'}}/>
