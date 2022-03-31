@@ -121,8 +121,7 @@ class HomePage extends React.Component {
         <br />
         <br />
         <br />
-        <br />
-
+   
         <mui.TextField fullWidth label='Baustellenname' onChange={(e) => this.handleTitleChange(e)}
           value={this.state.docData.title} />
 

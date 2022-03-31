@@ -1,8 +1,8 @@
 import * as mui from '@mui/material';
 import React from 'react';
-import { Menu as MenuIcon, Assignment as AssignmentIcon, AddBox as AddBoxIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, Assignment as AssignmentIcon, AddBox as AddBoxIcon, ArrowBackIosNew as ArrowBackIosNewIcon } from '@mui/icons-material';
 
-import image from './Hintergrundbild2.jpg';
+import image from './bg1.png';
 
 class BasicUIComponent extends React.Component {
 
@@ -34,7 +34,7 @@ class BasicUIComponent extends React.Component {
             width: '100%',
             height: '100%',
             overflowY: 'scroll',
-            backgroundImage: image,
+            backgroundImage: 'url(' + image + ')',
         };
         return (
             <div style={basicStyle}>
@@ -55,6 +55,14 @@ class BasicUIComponent extends React.Component {
                             </mui.ListItemIcon>
                             <mui.ListItemText>
                                 Neues Bauprojekt
+                            </mui.ListItemText>
+                        </mui.ListItemButton>
+                        <mui.ListItemButton  onClick={() => this.handlerMenuClose()}>
+                            <mui.ListItemIcon>
+                                <ArrowBackIosNewIcon fontSize='small' />
+                            </mui.ListItemIcon>
+                            <mui.ListItemText>
+                                Schließen
                             </mui.ListItemText>
                         </mui.ListItemButton>
                     </mui.List>
