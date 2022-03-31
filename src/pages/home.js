@@ -98,10 +98,10 @@ class HomePage extends React.Component {
   }
 
   handleBTPOSave() {
-    const tempData = this.state.docData;
-    const tempBTdata1 = JSON.parse(JSON.stringify(this.state.currentBTdata));
-    tempBTdata1.id = tempData.bt.length;
-    tempData.bt.push(tempBTdata1);
+    const tempData = this.state.docData; //Daten aus dem State ziehen
+    const tempBTdata1 = JSON.parse(JSON.stringify(this.state.currentBTdata)); //neue BTDaten dupliziert unabhängig
+    tempBTdata1.id = tempData.bt.length; //individuelle ID für das BT aus der Länge
+    tempData.bt.push(tempBTdata1); //BTObjekt wird DocData hinzugefügt
     if (this.state.currentBTdata.btType === 'balisen' && this.state.currentBTdata.gruppe) {
       const tempBTdata2 = JSON.parse(JSON.stringify(this.state.currentBTdata));
       tempBTdata2.id = tempData.bt.length;
