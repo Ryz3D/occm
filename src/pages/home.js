@@ -43,17 +43,17 @@ class HomePage extends React.Component {
     this.currentDoc = parseInt(localStorage.getItem('currentDoc') || '0');
     const currentDocData = JSON.parse(localStorage.getItem('doc' + this.currentDoc) || '{}');
     if (Object.keys(currentDocData).length !== 0) {
-      currentDocData.date=new Date(currentDocData.date);
+      currentDocData.date = new Date(currentDocData.date);
       this.setState({
         docData: currentDocData,
       });
     }
   }
-  
+
   saveDoc() {
     localStorage.setItem('doc' + this.currentDoc, JSON.stringify(this.state.docData));
   }
-  
+
   handleTitleChange(event) {
     const tempData = this.state.docData;
     tempData.title = event.target.value;
@@ -69,7 +69,7 @@ class HomePage extends React.Component {
       docData: tempData,
     }, () => this.saveDoc());
   }
-  
+
   handleBTSelect(event) {
     this.setState({
       selectedBT: event.target.value,
@@ -98,16 +98,17 @@ class HomePage extends React.Component {
   }
 
   handleBTPOSave() {
-    const tempData = this.state.docData; //Daten aus dem State ziehen
-    const tempBTdata1 = JSON.parse(JSON.stringify(this.state.currentBTdata)); //neue BTDaten dupliziert unabhängig
-    tempBTdata1.id = tempData.bt.length; //individuelle ID für das BT aus der Länge
-    tempData.bt.push(tempBTdata1); //BTObjekt wird DocData hinzugefügt
+    const tempData = JSON.parse(JSON.stringify(this.state.docData));    //Daten aus dem State ziehen
+    const tempBTdata1 = JSON.parse(JSON.stringify(this.state.currentBTdata));   //neue BTDaten dupliziert unabhängig
+    tempBTdata1.id = tempData.bt.length;    //individuelle ID für das BT aus der Länge
+    tempData.bt.push(tempBTdata1);    //BTObjekt wird DocData hinzugefügt
     if (this.state.currentBTdata.btType === 'balisen' && this.state.currentBTdata.gruppe) {
       const tempBTdata2 = JSON.parse(JSON.stringify(this.state.currentBTdata));
       tempBTdata2.id = tempData.bt.length;
       tempBTdata2.bezeichnung += ' II';
       tempData.bt.push(tempBTdata2);
     }
+    tempData.date = new Date(tempData.date);
     this.setState({
       BtPOopen: false,
       canSaveBT: false,
@@ -144,7 +145,7 @@ class HomePage extends React.Component {
         <br />
         <mui.FormControlLabel labelPlacement='start' label='Datum:' control={
           <div style={{ marginLeft: '10px' }} >
-            <DatePicker dateFormat='d.M.yyyy' selected={this.state.docData.date} onChange={(d) => this.handleDateChange(d)}/>
+            <DatePicker dateFormat='d.M.yyyy' selected={this.state.docData.date} onChange={(d) => this.handleDateChange(d)} />
           </div>
         } />
         <br />
@@ -211,7 +212,7 @@ class HomePage extends React.Component {
               </mui.TableCell>
               <mui.TableCell />
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('az')} style={{cursor: 'pointer'}}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('az')} style={{ cursor: 'pointer' }}>
               <mui.TableCell>
                 Achszähler
               </mui.TableCell>
@@ -219,7 +220,7 @@ class HomePage extends React.Component {
                 {this.state.docData.bt.filter((bt) => bt.btType === 'az').length}
               </mui.TableCell>
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('balisen')} style={{cursor: 'pointer'}}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('balisen')} style={{ cursor: 'pointer' }}>
               <mui.TableCell>
                 Balisen
               </mui.TableCell>
@@ -227,7 +228,7 @@ class HomePage extends React.Component {
                 {this.state.docData.bt.filter((bt) => bt.btType === 'balisen').length}
               </mui.TableCell>
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('lzb')} style={{cursor: 'pointer'}}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('lzb')} style={{ cursor: 'pointer' }}>
               <mui.TableCell>
                 LZB Schrank
               </mui.TableCell>
@@ -235,7 +236,7 @@ class HomePage extends React.Component {
                 {this.state.docData.bt.filter((bt) => bt.btType === 'lzb').length}
               </mui.TableCell>
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('indusi')} style={{cursor: 'pointer'}}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('indusi')} style={{ cursor: 'pointer' }}>
               <mui.TableCell>
                 Indusi
               </mui.TableCell>
@@ -243,7 +244,7 @@ class HomePage extends React.Component {
                 {this.state.docData.bt.filter((bt) => bt.btType === 'indusi').length}
               </mui.TableCell>
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('bemerkung')} style={{cursor: 'pointer'}}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('bemerkung')} style={{ cursor: 'pointer' }}>
               <mui.TableCell>
                 Bemerkungen
               </mui.TableCell>
@@ -251,7 +252,7 @@ class HomePage extends React.Component {
                 {this.state.docData.bt.filter((bt) => bt.btType === 'bemerkung').length}
               </mui.TableCell>
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('')} style={{cursor: 'pointer'}}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('')} style={{ cursor: 'pointer' }}>
               <mui.TableCell style={{
                 display: 'flex',
                 alignItems: 'self-end'

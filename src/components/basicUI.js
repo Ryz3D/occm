@@ -38,7 +38,7 @@ class BasicUIComponent extends React.Component {
         };
 
         const exitButtonStyle = {
-            position: 'fixed',
+            position: 'absolute',
             bottom: '2%',
         };
 
