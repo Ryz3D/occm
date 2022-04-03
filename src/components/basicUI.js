@@ -36,6 +36,12 @@ class BasicUIComponent extends React.Component {
             overflowY: 'scroll',
             backgroundImage: 'url(' + image + ')',
         };
+
+        const exitButtonStyle = {
+            position: 'fixed',
+            bottom: '2%',
+        };
+
         return (
             <div style={basicStyle}>
                 <mui.SwipeableDrawer open={this.state.menuOpen} onOpen={() => this.handlerMenuOpen()}
@@ -57,7 +63,7 @@ class BasicUIComponent extends React.Component {
                                 Neues Bauprojekt
                             </mui.ListItemText>
                         </mui.ListItemButton>
-                        <mui.ListItemButton  onClick={() => this.handlerMenuClose()}>
+                        <mui.ListItemButton onClick={() => this.handlerMenuClose()} style={exitButtonStyle}>
                             <mui.ListItemIcon>
                                 <ArrowBackIosNewIcon fontSize='small' />
                             </mui.ListItemIcon>
