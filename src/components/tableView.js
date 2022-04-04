@@ -62,6 +62,10 @@ class TableViewComponent extends React.Component {
             )
         });
 
+        for (var c of columns) {
+            c.flex = 1;
+        }
+
         const basicStyle = {
             background: '#fff',
             position: 'absolute',
@@ -88,7 +92,7 @@ class TableViewComponent extends React.Component {
                     <mui.Grid item style={boxItemStyle}>
                         <b>Tag:</b>
                         <div style={boxStyle}>
-                            {this.props.docData.date.toLocaleDateString()}
+                            {this.props.docData.date.toLocaleDateString('de')}
                         </div>
                     </mui.Grid>
                     <div style={{ width: '31px' }} />
@@ -99,10 +103,10 @@ class TableViewComponent extends React.Component {
                         </div>
                     </mui.Grid>
                 </mui.Grid>
-                <DataGrid columns={columns}
-                    rows={this.props.docData.bt.filter((bt) => this.props.filter === bt.btType || this.props.filter === '*')}
+                <DataGrid density='compact'
+                    columns={columns} rows={this.props.docData.bt.filter((bt) => this.props.filter === bt.btType || this.props.filter === '*')}
                     components={{
-                        NoRowsOverlay: () => <mui.Typography variant='h2' fontSize='1.5rem' style={{ textAlign: 'center' }}>
+                        NoRowsOverlay: () => <mui.Typography variant='h2' fontSize='1rem' style={{ textAlign: 'center' }}>
                             Keine Daten vorhanden
                         </mui.Typography>,
                     }} />

@@ -11,6 +11,7 @@ import BtBemerkung from '../components/Bt/Bemerkungen'
 import BtIndusi from '../components/Bt/Indusi';
 import BtLZB from '../components/Bt/LZB';
 import TableViewComponent from '../components/tableView';
+import PDFDownloadComponent from '../components/pdfDownload';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -154,11 +155,15 @@ class HomePage extends React.Component {
 
         <br />
         <br />
-        <mui.FormControlLabel labelPlacement='start' label='Datum:' control={
-          <div style={{ marginLeft: '10px' }} >
-            <DatePicker dateFormat='d.M.yyyy' selected={this.state.docData.date} onChange={(d) => this.handleDateChange(d)} />
-          </div>
-        } />
+
+        <mui.FormLabel>
+          Datum:
+        </mui.FormLabel>
+        <div style={{ display: 'inline-block', marginLeft: '10px' }} >
+          <DatePicker dateFormat='d.M.yyyy' shouldCloseOnSelect
+            selected={this.state.docData.date} onChange={(d) => this.handleDateChange(d)} />
+        </div>
+
         <br />
         <br />
 
@@ -292,10 +297,11 @@ class HomePage extends React.Component {
         <br />
         <br />
 
-        <mui.Button fullWidth variant='contained'>
-          PDF erstellen
-        </mui.Button>
-      </BasicUIComponent >
+        <PDFDownloadComponent />
+
+        <br />
+        <br />
+      </BasicUIComponent>
     );
   }
 }

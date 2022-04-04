@@ -40,6 +40,7 @@ class BasicUIComponent extends React.Component {
         const exitButtonStyle = {
             position: 'absolute',
             bottom: '2%',
+            width: '100%',
         };
 
         return (
@@ -63,7 +64,10 @@ class BasicUIComponent extends React.Component {
                                 Neues Bauprojekt
                             </mui.ListItemText>
                         </mui.ListItemButton>
-                        <mui.ListItemButton onClick={() => this.handlerMenuClose()} style={exitButtonStyle}>
+                    </mui.List>
+                    <div style={exitButtonStyle}>
+                        <mui.Divider />
+                        <mui.ListItemButton onClick={() => this.handlerMenuClose()}>
                             <mui.ListItemIcon>
                                 <ArrowBackIosNewIcon fontSize='small' />
                             </mui.ListItemIcon>
@@ -71,14 +75,14 @@ class BasicUIComponent extends React.Component {
                                 Schließen
                             </mui.ListItemText>
                         </mui.ListItemButton>
-                    </mui.List>
+                    </div>
                 </mui.SwipeableDrawer>
                 <mui.AppBar>
                     <mui.Toolbar>
                         <mui.IconButton onClick={() => this.handlerMenuOpen()}>
                             <MenuIcon />
                         </mui.IconButton>
-                        <mui.Typography variant='h5' marginLeft='12px'>
+                        <mui.Typography variant='h5' marginLeft='12px' marginTop='2px'>
                             OCCM
                         </mui.Typography>
                     </mui.Toolbar>
