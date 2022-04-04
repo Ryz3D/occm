@@ -12,6 +12,7 @@ import BtIndusi from '../components/Bt/Indusi';
 import BtLZB from '../components/Bt/LZB';
 import TableViewComponent from '../components/tableView';
 import PDFDownloadComponent from '../components/pdfDownload';
+import PDFViewComponent from '../components/pdfView';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class HomePage extends React.Component {
         bt: [],
       },
       tablePOfilter: '',
+      previewOpen: true, // ---------------------
     };
     this.theme = mui.createTheme({
       palette: {
@@ -221,6 +223,14 @@ class HomePage extends React.Component {
           </mui.Popover>
         </mui.ThemeProvider>
 
+        <mui.Popover open={this.state.previewOpen} onClose={() => this.setState({ previewOpen: false })} BackdropProps
+          anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+          transformOrigin={{ horizontal: 'center', vertical: 'top' }}>
+          <mui.Box padding='30px' width='80vw' height='80vh'>
+            <PDFViewComponent data={this.state.docData} />
+          </mui.Box>
+        </mui.Popover>
+
         <br />
 
         <mui.Typography>
@@ -290,14 +300,14 @@ class HomePage extends React.Component {
 
         <br />
 
-        <mui.Button fullWidth variant='outlined'>
+        <mui.Button fullWidth variant='outlined' onClick={() => this.setState({ previewOpen: true })}>
           PDF-Vorschau
         </mui.Button>
 
         <br />
         <br />
 
-        <PDFDownloadComponent />
+        <PDFDownloadComponent data={this.state.docData} />
 
         <br />
         <br />

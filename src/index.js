@@ -7,7 +7,6 @@ import { Routes, BrowserRouter, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import HomePage from './pages/home';
-import PDFPage from './pages/pdf';
 import NotFoundPage from './pages/notFound';
 import { CssBaseline } from '@mui/material';
 
@@ -36,7 +35,6 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/pdf' element={<PDFPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

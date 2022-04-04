@@ -19,11 +19,13 @@ class TableViewComponent extends React.Component {
                 field: 'btType',
                 headerName: 'Typ',
                 valueGetter: (parameter) => btTypes[parameter.row.btType],
+                flex: 1,
             });
         }
         columns.push({
             field: 'bezeichnung',
             headerName: 'Bezeichnung',
+            flex: 1,
         });
 
         const makeCheckbox = (parameter) => (
@@ -34,6 +36,7 @@ class TableViewComponent extends React.Component {
                 field: 'gruppe',
                 headerName: 'Balisengruppe',
                 renderCell: makeCheckbox,
+                width: 50,
             });
         }
         if (this.props.filter === 'indusi' || this.props.filter === '*') {
@@ -41,6 +44,7 @@ class TableViewComponent extends React.Component {
                 field: 'mitKabel',
                 headerName: 'Mit Kabel',
                 renderCell: makeCheckbox,
+                width: 50,
             });
         }
         if (this.props.filter === 'lzb' || this.props.filter === '*') {
@@ -48,6 +52,7 @@ class TableViewComponent extends React.Component {
                 field: 'NGmAB',
                 headerName: 'NG mit AB',
                 renderCell: makeCheckbox,
+                width: 50,
             });
         }
 
@@ -59,12 +64,9 @@ class TableViewComponent extends React.Component {
                 <mui.IconButton onClick={() => this.props.onDelete(parameter.row.id)}>
                     <DeleteIcon color='error' />
                 </mui.IconButton>
-            )
+            ),
+            width: 50,
         });
-
-        for (var c of columns) {
-            c.flex = 1;
-        }
 
         const basicStyle = {
             background: '#fff',
@@ -75,35 +77,9 @@ class TableViewComponent extends React.Component {
             height: '100%',
         };
 
-        const boxStyle = {
-            border: '#000 solid 2px',
-            marginLeft: '6px',
-            padding: '2px 10px',
-        };
-
-        const boxItemStyle = {
-            display: 'flex',
-            alignItems: 'center',
-        };
-
         return (
             <div style={basicStyle}>
-                <mui.Grid container style={{ justifyContent: 'center', padding: '20px' }} >
-                    <mui.Grid item style={boxItemStyle}>
-                        <b>Tag:</b>
-                        <div style={boxStyle}>
-                            {this.props.docData.date.toLocaleDateString('de')}
-                        </div>
-                    </mui.Grid>
-                    <div style={{ width: '31px' }} />
-                    <mui.Grid item style={boxItemStyle}>
-                        <b>Baustelle:</b>
-                        <div style={boxStyle}>
-                            {this.props.docData.title}
-                        </div>
-                    </mui.Grid>
-                </mui.Grid>
-                <DataGrid density='compact'
+                <DataGrid autoHeight
                     columns={columns} rows={this.props.docData.bt.filter((bt) => this.props.filter === bt.btType || this.props.filter === '*')}
                     components={{
                         NoRowsOverlay: () => <mui.Typography variant='h2' fontSize='1rem' style={{ textAlign: 'center' }}>

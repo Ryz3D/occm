@@ -13,12 +13,10 @@ class PDFViewComponent extends React.Component {
             border: 'none',
         };
 
-        // pass docdata from query parameter
-
         return (
             <>
                 <PDFViewer style={basicStyle}>
-                    <PDFDocumentComponent />
+                    <PDFDocumentComponent data={this.props.data} />
                 </PDFViewer>
             </>
         );

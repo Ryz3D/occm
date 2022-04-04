@@ -26,7 +26,7 @@ class PDFDownloadComponent extends React.Component {
                 <BlobProvider document={<PDFDocumentComponent data={this.props.data} />}>
                     {(parameters) => this.handlePDFData(parameters)}
                 </BlobProvider>
-                <mui.Button fullWidth variant='contained' href={this.state.downloadLink}>
+                <mui.Button fullWidth variant='contained' href={this.state.downloadLink} target='_blank'>
                     PDF erstellen
                 </mui.Button>
             </>
