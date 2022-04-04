@@ -1,5 +1,4 @@
 import React from 'react';
-import * as mui from '@mui/material';
 import { Document, Page, Text, View } from '@react-pdf/renderer';
 
 class PDFTableComponent extends React.Component {
