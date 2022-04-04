@@ -29,7 +29,7 @@ class BtAz extends React.Component {
                     Achszähler
                 </mui.Typography>
                 <br />
-                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
+                <TextInputComponent autoFocus onChange={(text) => this.dataChange('bezeichnung', text)} />
             </>
         );
     }

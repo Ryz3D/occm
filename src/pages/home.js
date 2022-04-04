@@ -26,7 +26,7 @@ class HomePage extends React.Component {
         date: new Date(),
         bt: [],
       },
-      tablePOopen: false,
+      tablePOfilter: '',
     };
     this.theme = mui.createTheme({
       palette: {
@@ -117,16 +117,27 @@ class HomePage extends React.Component {
   }
 
   handleTablePOopen(btType) {
-    console.log('ihr faulen Schmarozer müsst das hier noch implementieren')
     this.setState({
-      tablePOopen: true,
+      tablePOfilter: btType,
     });
   }
 
   handleTablePOclose() {
     this.setState({
-      tablePOopen: false,
+      tablePOfilter: '',
     });
+  }
+
+  handleTableDelete(id) {
+    const tempData = JSON.parse(JSON.stringify(this.state.docData));
+    tempData.bt = tempData.bt.filter((bt) => bt.id !== id);
+    for (var i in tempData.bt) {
+      tempData.bt[i].id = +i;
+    }
+    tempData.date = new Date(tempData.date);
+    this.setState({
+      docData: tempData,
+    }, () => this.saveDoc());
   }
 
 
@@ -192,12 +203,15 @@ class HomePage extends React.Component {
           </mui.Box>
         </mui.Popover>
         <mui.ThemeProvider theme={this.theme}>
-          <mui.Popover open={this.state.tablePOopen} BackdropProps
+          <mui.Popover open={this.state.tablePOfilter !== ''} BackdropProps
             anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
             transformOrigin={{ horizontal: 'center', vertical: 'top' }}
             onClose={() => this.handleTablePOclose()}>
             <mui.Box padding='30px' width='80vw' height='80vh'>
-              <TableViewComponent docData={this.state.docData} />
+              <TableViewComponent
+                docData={this.state.docData}
+                filter={this.state.tablePOfilter}
+                onDelete={(id) => this.handleTableDelete(id)} />
             </mui.Box>
           </mui.Popover>
         </mui.ThemeProvider>
@@ -252,7 +266,7 @@ class HomePage extends React.Component {
                 {this.state.docData.bt.filter((bt) => bt.btType === 'bemerkung').length}
               </mui.TableCell>
             </mui.TableRow>
-            <mui.TableRow hover onClick={() => this.handleTablePOopen('')} style={{ cursor: 'pointer' }}>
+            <mui.TableRow hover onClick={() => this.handleTablePOopen('*')} style={{ cursor: 'pointer' }}>
               <mui.TableCell style={{
                 display: 'flex',
                 alignItems: 'self-end'

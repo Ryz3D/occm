@@ -1,31 +1,66 @@
 import * as mui from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import React from 'react';
+import { Delete as DeleteIcon } from '@mui/icons-material';
 
 class TableViewComponent extends React.Component {
     render() {
-        const columns = [
-            {
+        const btTypes = {
+            az: 'Achszähler',
+            balisen: 'Balisen',
+            lzb: 'LZB-Schrank',
+            indusi: 'Indusi',
+            bemerkung: 'Bemerkung',
+        };
+
+        const columns = [];
+        if (this.props.filter === '*') {
+            columns.push({
                 field: 'btType',
                 headerName: 'Typ',
-            },
-            {
-                field: 'bezeichnung',
-                headerName: 'Bezeichnung',
-            },
-            {
+                valueGetter: (parameter) => btTypes[parameter.row.btType],
+            });
+        }
+        columns.push({
+            field: 'bezeichnung',
+            headerName: 'Bezeichnung',
+        });
+
+        const makeCheckbox = (parameter) => (
+            <mui.Checkbox disabled checked={parameter.value} />
+        );
+        if (this.props.filter === 'balisen' || this.props.filter === '*') {
+            columns.push({
                 field: 'gruppe',
                 headerName: 'Balisengruppe',
-            },
-            {
+                renderCell: makeCheckbox,
+            });
+        }
+        if (this.props.filter === 'indusi' || this.props.filter === '*') {
+            columns.push({
                 field: 'mitKabel',
                 headerName: 'Mit Kabel',
-            },
-            {
+                renderCell: makeCheckbox,
+            });
+        }
+        if (this.props.filter === 'lzb' || this.props.filter === '*') {
+            columns.push({
                 field: 'NGmAB',
                 headerName: 'NG mit AB',
-            },
-        ];
+                renderCell: makeCheckbox,
+            });
+        }
+
+        columns.push({
+            field: 'delete',
+            headerName: 'Löschen',
+            valueGetter: () => '',
+            renderCell: (parameter) => (
+                <mui.IconButton onClick={() => this.props.onDelete(parameter.row.id)}>
+                    <DeleteIcon color='error' />
+                </mui.IconButton>
+            )
+        });
 
         const basicStyle = {
             background: '#fff',
@@ -49,17 +84,14 @@ class TableViewComponent extends React.Component {
 
         return (
             <div style={basicStyle}>
-                <mui.Typography variant='h6'>
-                    Arbeitsaufnahme für Baustellen GE &amp; SE Maßnahmen Oberbau
-                </mui.Typography>
-                <mui.Grid container style={{justifyContent: 'center'}}>
+                <mui.Grid container style={{ justifyContent: 'center', padding: '20px' }} >
                     <mui.Grid item style={boxItemStyle}>
                         <b>Tag:</b>
                         <div style={boxStyle}>
                             {this.props.docData.date.toLocaleDateString()}
                         </div>
                     </mui.Grid>
-                    <div style={{width: '31px'}}/>
+                    <div style={{ width: '31px' }} />
                     <mui.Grid item style={boxItemStyle}>
                         <b>Baustelle:</b>
                         <div style={boxStyle}>
@@ -67,7 +99,13 @@ class TableViewComponent extends React.Component {
                         </div>
                     </mui.Grid>
                 </mui.Grid>
-                <DataGrid columns={columns} rows={this.props.docData.bt} />
+                <DataGrid columns={columns}
+                    rows={this.props.docData.bt.filter((bt) => this.props.filter === bt.btType || this.props.filter === '*')}
+                    components={{
+                        NoRowsOverlay: () => <mui.Typography variant='h2' fontSize='1.5rem' style={{ textAlign: 'center' }}>
+                            Keine Daten vorhanden
+                        </mui.Typography>,
+                    }} />
             </div>
         );
     }

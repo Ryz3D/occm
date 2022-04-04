@@ -30,7 +30,7 @@ class BtBalisen extends React.Component {
                     Balisen
                 </mui.Typography>
                 <br />
-                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
+                <TextInputComponent autoFocus onChange={(text) => this.dataChange('bezeichnung', text)} />
 
                 <CheckBoxComponent onChange={(check) => this.dataChange('gruppe', check)}
                     label='Balisengruppe' />

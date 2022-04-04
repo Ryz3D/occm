@@ -30,7 +30,7 @@ class BtLZB extends React.Component {
                     LZB Schrank
                 </mui.Typography>
                 <br />
-                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
+                <TextInputComponent autoFocus onChange={(text) => this.dataChange('bezeichnung', text)} />
 
                 <CheckBoxComponent onChange={(check) => this.dataChange('NGmAB', check)}
                     label='Nachbargleis mit Außerbetrieb' />

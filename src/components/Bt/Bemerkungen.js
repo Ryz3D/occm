@@ -27,7 +27,7 @@ class BtBemerkung extends React.Component {
                     Bemerkung
                 </mui.Typography>
                 <br />
-                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
+                <TextInputComponent autoFocus onChange={(text) => this.dataChange('bezeichnung', text)} />
             </>
         );
     }

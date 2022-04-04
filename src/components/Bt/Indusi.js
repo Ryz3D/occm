@@ -30,7 +30,7 @@ class BtIndusi extends React.Component {
                     Indusi
                 </mui.Typography>
                 <br />
-                <TextInputComponent onChange={(text) => this.dataChange('bezeichnung', text)} />
+                <TextInputComponent autoFocus onChange={(text) => this.dataChange('bezeichnung', text)} />
 
                 <CheckBoxComponent onChange={(check) => this.dataChange('mitKabel', check)}
                     label='mit Kabel' />
