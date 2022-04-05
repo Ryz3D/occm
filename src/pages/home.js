@@ -29,7 +29,7 @@ class HomePage extends React.Component {
         bt: [],
       },
       tablePOfilter: '',
-      previewOpen: true, // ---------------------
+      previewOpen: false,
     };
     this.theme = mui.createTheme({
       palette: {

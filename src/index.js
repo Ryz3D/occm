@@ -10,6 +10,25 @@ import HomePage from './pages/home';
 import NotFoundPage from './pages/notFound';
 import { CssBaseline } from '@mui/material';
 
+/*
+
+- kamera/galerie button in bt popover
+ -> base64 in bt
+- löschen button in der sidebar
+- dokumente nach zuletzt genutzt sortieren
+ -> beim öffnen an den anfang schieben
+- dokumente laden (diesen doc index setzen)
+- tableview
+ -> raufklicken für detailansicht inkl. bild
+- export
+ -> dropdown
+ -> pdf bilder
+ -> json!
+ -> csv?
+ -> xls?
+
+*/
+
 const theme = createTheme({
   palette: {
     primary: {

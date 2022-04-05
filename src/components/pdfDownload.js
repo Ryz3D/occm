@@ -7,14 +7,14 @@ class PDFDownloadComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            downloadLink: '',
+            downloadLink: null,
         };
     }
 
     handlePDFData(parameters) {
         if (this.state.downloadLink !== parameters.url) {
             this.setState({
-                downloadLink: parameters.url,
+                downloadLink: parameters.url || null,
             });
         }
         return <></>;
@@ -26,7 +26,8 @@ class PDFDownloadComponent extends React.Component {
                 <BlobProvider document={<PDFDocumentComponent data={this.props.data} />}>
                     {(parameters) => this.handlePDFData(parameters)}
                 </BlobProvider>
-                <mui.Button fullWidth variant='contained' href={this.state.downloadLink} target='_blank'>
+                <mui.Button fullWidth variant='contained' disabled={this.state.downloadLink === null}
+                    href={this.state.downloadLink} target='_blank'>
                     PDF erstellen
                 </mui.Button>
             </>
