@@ -17,8 +17,8 @@ class BasicUIComponent extends React.Component {
         super(props);
 
         const docs = [];
-        if (localStorage.getItem('doc0')) {
-            for (var i = 0; docs[docs.length - 1] !== null; i++) {
+        if (localStorage.getItem('doc1')) {
+            for (var i = 1; docs[docs.length - 1] !== null; i++) {
                 const docDataStr = localStorage.getItem('doc' + i);
                 docs.push(JSON.parse(docDataStr === null ? 'null' : docDataStr));
             }

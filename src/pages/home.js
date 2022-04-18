@@ -61,10 +61,7 @@ class HomePage extends React.Component {
 
   loadCurrentDoc() {
     const urlSearch = new URLSearchParams(this.props.location.search);
-    var newCurrentDoc = parseInt(urlSearch.get('id') || '0');
-    if (!newCurrentDoc) {
-      newCurrentDoc = parseInt(localStorage.getItem('currentDoc') || '0');
-    }
+    var newCurrentDoc = parseInt(urlSearch.get('id') || localStorage.getItem('currentDoc') || '1');
     if (this.currentDoc !== newCurrentDoc) {
       localStorage.setItem('currentDoc', newCurrentDoc.toString());
       this.currentDoc = newCurrentDoc;
@@ -456,7 +453,7 @@ class HomePage extends React.Component {
 
         <a ref={this.downloadRef} download={this.state.downloadName} href={this.state.downloadURL}>
         </a>
-        <input style={{ display: 'none' }} ref={this.jsonFileRef} type='file' accept='.occm' onChange={() => this.handleJSONImport()} />
+        <input style={{ display: 'none' }} ref={this.jsonFileRef} type='file' accept='.occm;.json' onChange={() => this.handleJSONImport()} />
         <input style={{ display: 'none' }} ref={this.cameraFileRef} type='file' accept='image/*;capture=camera' onChange={() => this.handleBTImage()} />
 
       </BasicUIComponent>

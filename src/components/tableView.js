@@ -173,7 +173,6 @@ class TableViewComponent extends React.Component {
                             </mui.Typography>
                         </>
                         <br />
-                        <br />
                         <mui.Button fullWidth variant='outlined' onClick={() => this.setState({ detailView: null })}>
                             Schließen
                         </mui.Button>

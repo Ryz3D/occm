@@ -15,13 +15,9 @@ import { CssBaseline } from '@mui/material';
 - help
  - wenn das geöffnete dokument gelöscht wird, wird automatisch ein neues angelegt. deswegen ist unten ein dokument ohne titel
 
-- kamera/galerie button in bt popover
- -> base64 in bt
-- tableview
- -> raufklicken für detailansicht inkl. bild
-- export
- -> pdf bilder
 - umlaute in csv
+- pdf seitenzahlen
+- localstorage init
 
 */
 
