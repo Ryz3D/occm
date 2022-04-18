@@ -17,7 +17,8 @@ import { CssBaseline } from '@mui/material';
 
 - umlaute in csv
 - pdf seitenzahlen
-- localstorage init
+- localstorage init & saves (no placeholder?)
+- compress images with canvas (low-res, jpg?, low-level)
 
 */
 

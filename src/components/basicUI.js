@@ -144,7 +144,7 @@ class BasicUIComponent extends React.Component {
                     onClose={() => this.handlerMenuClose()}>
                     <mui.List>
                         {this.state.docs.map((doc, i) =>
-                            Object.keys(doc).length > 0 ?
+                            Object.keys(doc || {}).length > 0 ?
                                 <mui.ListItem>
                                     <mui.Button style={sidebarButtonStyle} variant={this.props.currentDoc === i ? 'contained' : ''} onClick={() => this.handleDocOpen(i)}>
                                         <mui.ListItemIcon>

@@ -44,7 +44,7 @@ class HomePage extends React.Component {
         mode: 'light',
       },
     });
-    this.currentDoc = 1;
+    this.currentDoc = 0;
 
     this.cameraFileRef = React.createRef();
     this.downloadRef = React.createRef();
@@ -85,9 +85,7 @@ class HomePage extends React.Component {
           date: new Date(),
           bt: [],
         },
-      }, () => {
-        localStorage.setItem('doc' + this.currentDoc, JSON.stringify(this.state.docData));
-      });
+      }, () => this.saveDoc());
     }
   }
 
