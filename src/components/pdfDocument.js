@@ -52,6 +52,7 @@ class PDFTableCellComponent extends React.Component {
             display: 'inline-block',
             height: '100%',
             marginTop: this.props.header ? '0.8mm' : '1.0mm',
+            marginRight: this.props.checkbox ? '8mm' : '',
             wordBreak: 'anywhere',
         };
         const checkboxStyle = {
@@ -137,7 +138,7 @@ class PDFDocumentComponent extends React.Component {
                         <Text style={{ fontSize: 16, textAlign: 'center' }}>
                             Arbeitsaufnahme für Baustellen GE &amp; SE Maßnahmen Oberbau
                         </Text>
-                        <div style={{ flexDirection: 'row', justifyContent: 'center', marginTop: '3mm' }}>
+                        <div style={{ flexDirection: 'row', justifyContent: 'center', marginTop: '3mm', marginRight: '5mm' }}>
                             <div style={boxStyle}>
                                 <Text>Tag: {this.props.data.date.toLocaleDateString('de')}</Text>
                             </div>

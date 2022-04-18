@@ -1,9 +1,14 @@
-import { Functions as FunctionsIcon } from '@mui/icons-material';
+import {
+  Functions as FunctionsIcon,
+  PhotoCamera as PhotoCameraIcon,
+} from '@mui/icons-material';
 import * as mui from '@mui/material';
 import React from 'react';
 import BasicUIComponent from '../components/basicUI';
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
+import routerLocation from '../wrapper/routerLocation';
+import routerNavigate from '../wrapper/routerNavigate';
 
 import BtAz from '../components/Bt/Az';
 import BtBalisen from '../components/Bt/Balisen';
@@ -17,6 +22,7 @@ import PDFViewComponent from '../components/pdfView';
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       selectedBT: 0,
       BtPOopen: false,
@@ -30,25 +36,60 @@ class HomePage extends React.Component {
       },
       tablePOfilter: '',
       previewOpen: false,
+      downloadURL: '',
+      btImageData: '',
     };
     this.theme = mui.createTheme({
       palette: {
         mode: 'light',
       },
     });
+    this.currentDoc = 0;
+
+    this.cameraFileRef = React.createRef();
+    this.downloadRef = React.createRef();
+    this.jsonFileRef = React.createRef();
+  }
+
+  componentDidUpdate() {
+    this.loadCurrentDoc();
   }
 
   componentDidMount() {
-    this.reloadDoc();
+    this.loadCurrentDoc();
+  }
+
+  loadCurrentDoc() {
+    const urlSearch = new URLSearchParams(this.props.location.search);
+    var newCurrentDoc = parseInt(urlSearch.get('id') || '0');
+    if (!newCurrentDoc) {
+      newCurrentDoc = parseInt(localStorage.getItem('currentDoc') || '0');
+    }
+    if (this.currentDoc !== newCurrentDoc) {
+      localStorage.setItem('currentDoc', newCurrentDoc.toString());
+      this.currentDoc = newCurrentDoc;
+      this.reloadDoc();
+    }
   }
 
   reloadDoc() {
-    this.currentDoc = parseInt(localStorage.getItem('currentDoc') || '0');
     const currentDocData = JSON.parse(localStorage.getItem('doc' + this.currentDoc) || '{}');
     if (Object.keys(currentDocData).length !== 0) {
       currentDocData.date = new Date(currentDocData.date);
       this.setState({
         docData: currentDocData,
+      });
+    }
+    else {
+      this.setState({
+        docData: {
+          version: '1.0',
+          title: '',
+          date: new Date(),
+          bt: [],
+        },
+      }, () => {
+        localStorage.setItem('doc' + this.currentDoc, JSON.stringify(this.state.docData));
       });
     }
   }
@@ -101,21 +142,25 @@ class HomePage extends React.Component {
   }
 
   handleBTPOSave() {
-    const tempData = JSON.parse(JSON.stringify(this.state.docData));    //Daten aus dem State ziehen
-    const tempBTdata1 = JSON.parse(JSON.stringify(this.state.currentBTdata));   //neue BTDaten dupliziert unabhängig
-    tempBTdata1.id = tempData.bt.length;    //individuelle ID für das BT aus der Länge
-    tempData.bt.push(tempBTdata1);    //BTObjekt wird DocData hinzugefügt
+    const tempData = JSON.parse(JSON.stringify(this.state.docData));
+    const tempBTdata1 = JSON.parse(JSON.stringify(this.state.currentBTdata));
+    tempBTdata1.id = tempData.bt.length;
+    tempBTdata1.image = this.state.btImageData;
+    tempData.bt.push(tempBTdata1);
     if (this.state.currentBTdata.btType === 'balisen' && this.state.currentBTdata.gruppe) {
       const tempBTdata2 = JSON.parse(JSON.stringify(this.state.currentBTdata));
       tempBTdata2.id = tempData.bt.length;
+      tempBTdata2.image = this.state.btImageData;
       tempBTdata2.bezeichnung += ' II';
       tempData.bt.push(tempBTdata2);
     }
     tempData.date = new Date(tempData.date);
+
     this.setState({
       BtPOopen: false,
       canSaveBT: false,
       docData: tempData,
+      btImageData: '',
     }, () => this.saveDoc());
   }
 
@@ -143,10 +188,81 @@ class HomePage extends React.Component {
     }, () => this.saveDoc());
   }
 
+  handleJSONImport() {
+    if (this.jsonFileRef.current.files.length === 1) {
+      const fr = new FileReader();
+      fr.onloadend = () => {
+        const docData = JSON.parse(fr.result);
+        if (docData.version === '1.0' && docData.title && docData.date && docData.bt) {
+          docData.date = new Date(docData.date);
+          this.setState({
+            docData,
+          }, () => this.saveDoc());
+        }
+      };
+      fr.readAsText(this.jsonFileRef.current.files[0]);
+    }
+  }
+
+  handleJSONExport() {
+    const filename = this.state.docData.title.replace(/[^\w\säöüÄÖÜß]/g, '').replace(/\s+/g, ' ');
+    const url = URL.createObjectURL(new Blob([JSON.stringify(this.state.docData)], { type: 'application/json' }));
+    this.setState({
+      downloadURL: url,
+      downloadName: filename + '.occm',
+    }, () => this.downloadRef.current.click());
+  }
+
+  handleCSVExport() {
+    const entries = [
+      [{ bezeichnung: 'AZ' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'az')],
+      [{ bezeichnung: 'Balisen' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'balisen')],
+      [{ bezeichnung: 'Gruppe' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'balisen').map((bt) => ({ bezeichnung: bt.gruppe ? 'x' : '' }))],
+      [{ bezeichnung: 'LZB Schrank' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'lzb')],
+      [{ bezeichnung: 'Nachbargleis mit Außerbetrieb' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'lzb').map((bt) => ({ bezeichnung: bt.NGmAB ? 'x' : '' }))],
+      [{ bezeichnung: 'Indusi' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'indusi')],
+      [{ bezeichnung: 'Mit Kabel', ...this.state.docData.bt.filter((bt) => bt.btType === 'indusi').map((bt) => ({ bezeichnung: bt.mitKabel ? 'x' : '' })) }],
+      [{ bezeichnung: 'Bemerkung' }, ...this.state.docData.bt.filter((bt) => bt.btType === 'bemerkung')],
+    ];
+    var rowCount = 0;
+    for (var e of entries) {
+      rowCount = Math.max(rowCount, e.length);
+    }
+
+    var csv = '';
+    for (var row = 0; row < rowCount; row++) {
+      for (var col = 0; col < entries.length; col++) {
+        csv += (entries[col][row] || { bezeichnung: '' }).bezeichnung.replace(';', '') + ';';
+      }
+      csv += '\n';
+    }
+
+    const filename = this.state.docData.title.replace(/[^\w\säöüÄÖÜß]/g, '').replace(/\s+/g, ' ');
+    const url = URL.createObjectURL(new Blob([csv], { type: 'text/plain' }));
+    this.setState({
+      downloadURL: url,
+      downloadName: filename + '.csv',
+    }, () => this.downloadRef.current.click());
+  }
+
+  handleBTImage() {
+    if (this.cameraFileRef.current.files.length === 1) {
+      const fr = new FileReader();
+      fr.onloadend = () => {
+        this.setState({
+          btImageData: fr.result || '',
+        });
+      };
+      fr.readAsDataURL(this.cameraFileRef.current.files[0]);
+    }
+  }
+
 
   render() {
     return (
-      <BasicUIComponent>
+      <BasicUIComponent
+        currentDoc={this.currentDoc || 0}
+        currentDocTitle={this.state.docData.title || ''}>
 
         <br />
         <br />
@@ -198,6 +314,14 @@ class HomePage extends React.Component {
             {this.state.selectedBT === 4 && <BtBemerkung onChange={(d, c) => this.handleBTData(d, c)} />}
             <br />
             <br />
+            <img style={{ width: '40%', display: 'block', margin: 'auto' }} alt='' src={this.state.btImageData} />
+            <mui.Button fullWidth variant='contained' startIcon={<PhotoCameraIcon />}
+              onClick={() => this.cameraFileRef.current.click()}>
+              Bild hinzufügen
+            </mui.Button>
+            <br />
+            <br />
+            <br />
             <mui.ButtonGroup fullWidth>
               <mui.Button color='inherit' onClick={() => this.handleBTPOClose()}>
                 Abbrechen
@@ -209,19 +333,18 @@ class HomePage extends React.Component {
             </mui.ButtonGroup>
           </mui.Box>
         </mui.Popover>
-        <mui.ThemeProvider theme={this.theme}>
-          <mui.Popover open={this.state.tablePOfilter !== ''} BackdropProps
-            anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
-            transformOrigin={{ horizontal: 'center', vertical: 'top' }}
-            onClose={() => this.handleTablePOclose()}>
-            <mui.Box padding='30px' width='80vw' height='80vh'>
-              <TableViewComponent
-                docData={this.state.docData}
-                filter={this.state.tablePOfilter}
-                onDelete={(id) => this.handleTableDelete(id)} />
-            </mui.Box>
-          </mui.Popover>
-        </mui.ThemeProvider>
+
+        <mui.Popover open={this.state.tablePOfilter !== ''} BackdropProps
+          anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+          transformOrigin={{ horizontal: 'center', vertical: 'top' }}
+          onClose={() => this.handleTablePOclose()}>
+          <mui.Box padding='30px' width='80vw' height='80vh'>
+            <TableViewComponent
+              docData={this.state.docData}
+              filter={this.state.tablePOfilter}
+              onDelete={(id) => this.handleTableDelete(id)} />
+          </mui.Box>
+        </mui.Popover>
 
         <mui.Popover open={this.state.previewOpen} onClose={() => this.setState({ previewOpen: false })} BackdropProps
           anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
@@ -300,6 +423,25 @@ class HomePage extends React.Component {
 
         <br />
 
+        <mui.ButtonGroup fullWidth variant='outlined' color='secondary'>
+          <mui.Button onClick={() => this.jsonFileRef.current.click()}>
+            OCCM-Import
+          </mui.Button>
+          <mui.Button onClick={() => this.handleJSONExport()}>
+            OCCM-Export
+          </mui.Button>
+        </mui.ButtonGroup>
+
+        <br />
+        <br />
+
+        <mui.Button fullWidth variant='outlined' color='secondary' onClick={() => this.handleCSVExport()}>
+          CSV-Export (Excel)
+        </mui.Button>
+
+        <br />
+        <br />
+
         <mui.Button fullWidth variant='outlined' onClick={() => this.setState({ previewOpen: true })}>
           PDF-Vorschau
         </mui.Button>
@@ -311,9 +453,15 @@ class HomePage extends React.Component {
 
         <br />
         <br />
+
+        <a ref={this.downloadRef} download={this.state.downloadName} href={this.state.downloadURL}>
+        </a>
+        <input style={{ display: 'none' }} ref={this.jsonFileRef} type='file' accept='.occm' onChange={() => this.handleJSONImport()} />
+        <input style={{ display: 'none' }} ref={this.cameraFileRef} type='file' accept='image/*;capture=camera' onChange={() => this.handleBTImage()} />
+
       </BasicUIComponent>
     );
   }
 }
 
-export default HomePage;
+export default routerNavigate(routerLocation(HomePage));

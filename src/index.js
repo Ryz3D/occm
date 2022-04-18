@@ -12,20 +12,16 @@ import { CssBaseline } from '@mui/material';
 
 /*
 
+- help
+ - wenn das geöffnete dokument gelöscht wird, wird automatisch ein neues angelegt. deswegen ist unten ein dokument ohne titel
+
 - kamera/galerie button in bt popover
  -> base64 in bt
-- löschen button in der sidebar
-- dokumente nach zuletzt genutzt sortieren
- -> beim öffnen an den anfang schieben
-- dokumente laden (diesen doc index setzen)
 - tableview
  -> raufklicken für detailansicht inkl. bild
 - export
- -> dropdown
  -> pdf bilder
- -> json!
- -> csv?
- -> xls?
+- umlaute in csv
 
 */
 
@@ -39,7 +35,7 @@ const theme = createTheme({
     },
     secondary: {
       light: '#ff7961',
-      main: '#0f0',
+      main: '#ffc917',
       dark: '#0f0',
       contrastText: '#fff',
     },
