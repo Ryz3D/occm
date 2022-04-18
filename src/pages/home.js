@@ -44,7 +44,7 @@ class HomePage extends React.Component {
         mode: 'light',
       },
     });
-    this.currentDoc = 0;
+    this.currentDoc = 1;
 
     this.cameraFileRef = React.createRef();
     this.downloadRef = React.createRef();
